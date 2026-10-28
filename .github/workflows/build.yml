@@ -12,19 +12,25 @@ jobs:
       
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.x'
           channel: 'stable'
-          
-      - name: Create fresh Flutter project structure
+
+      # Backup custom code/configs before scaffolding
+      - name: Backup custom files
         run: |
-          flutter create . --org com.caexamforge --project-name ca_exam_forge --platforms=android,windows
-          
-      - name: Restore custom main.dart and pubspec.yaml
+          mkdir temp_backup
+          cp lib/main.dart temp_backup/ 2>$null || true
+          cp pubspec.yaml temp_backup/ 2>$null || true
+
+      - name: Create Flutter project structure
         run: |
-          # The create command overrides files, let's copy ours back into place
-          # (Make sure your main.dart is available, or we let flutter create a default one and overwrite it)
-          echo "Project skeleton created successfully"
-          
+          flutter create . --org com.caexamforge --project-name ca_exam_forge --platforms=android,windows --force
+
+      # Restore custom code back into project
+      - name: Restore custom code
+        run: |
+          cp temp_backup/main.dart lib/main.dart 2>$null || true
+          cp temp_backup/pubspec.yaml pubspec.yaml 2>$null || true
+
       - run: flutter pub get
       - run: flutter build apk --release
       - run: flutter build windows --release
@@ -35,8 +41,8 @@ jobs:
           name: android-apk
           path: build/app/outputs/flutter-apk/app-release.apk
 
-      - name: Upload Windows Build
+      - name: Upload Windows Executable
         uses: actions/upload-artifact@v4
         with:
           name: windows-executable
-          path: build/windows/x64/runner/Release/
+          path: build/windows/runner/Release/
