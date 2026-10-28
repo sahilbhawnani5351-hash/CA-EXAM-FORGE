@@ -127,4 +127,12 @@ class _ExamHomeScreenState extends State<ExamHomeScreen> {
                     ),
                     const SizedBox(height: 20),
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(backgroundColor: Colors.red, foregroundColor: Colors.white),
+        onPressed: () {
+          // Add button action here
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.red,
+          foregroundColor: Colors.white,
+        ),
+        child: const Text('End Exam'),
+      ),
