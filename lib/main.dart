@@ -126,19 +126,21 @@ class _ExamHomeScreenState extends State<ExamHomeScreen> {
                       ),
                     ),
                     const SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.red,
-            foregroundColor: Colors.white,
-          ),
-          child: const Text('End Exam'),
-        ),
-      ],
-    ),
-  ) : Center(
-    child: ElevatedButton(
-      onPressed: () {},
-      child: const Text('Start Exam'),
-    ),
-  ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red,
+                        foregroundColor: Colors.white,
+                      ),
+                      child: const Text('End Exam'),
+                    ),
+                  ],
+                ),
+              )
+            : Center(
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Start Exam'),
+                ),
+              ),
+      ),
